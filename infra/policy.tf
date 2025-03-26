@@ -1,5 +1,5 @@
-resource "aws_iam_policy" "lambda_dynamodb_policy" {
-  name = "lambda_dynamodb_policy"
+resource "aws_iam_policy" "main_lambda_dynamodb" {
+  name = "main_lambda_dynamodb_policy"
 
   policy = jsonencode({
     Version = "2012-10-17",

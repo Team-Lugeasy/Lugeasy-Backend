@@ -1,5 +1,21 @@
+// AWS 프로바이더 설정
+provider "aws" {
+  region = "ap-northeast-1"
+}
+
+// Backend 설정
+terraform {
+  backend "s3" {
+    bucket         = "jimjim-terraform-state-bucket"
+    key            = "terraform.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = true
+    dynamodb_table = "jimjim-terraform-state"
+  }
+}
+
 resource "aws_s3_bucket" "jimjim_terraform_state_bucket" {
-  bucket = "jimjim-terraform-state-bucket" # 고유한 버킷 이름 지정
+  bucket = "jimjim-terraform-state-bucket"
   versioning {
     enabled = true
   }

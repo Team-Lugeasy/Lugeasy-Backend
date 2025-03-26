@@ -1,5 +1,5 @@
-resource "aws_iam_role" "lambda_exec" {
-  name = "lambda_exec_role"
+resource "aws_iam_role" "main_lambda" {
+  name = "main_lambda_iam_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -13,7 +13,7 @@ resource "aws_iam_role" "lambda_exec" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_dynamodb_attachment" {
-  role       = aws_iam_role.lambda_exec.name
-  policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
+resource "aws_iam_role_policy_attachment" "main_lambda_dynamodb" {
+  role       = aws_iam_role.main_lambda.name
+  policy_arn = aws_iam_policy.main_lambda_dynamodb.arn
 }
