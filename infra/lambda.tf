@@ -5,7 +5,7 @@ data "archive_file" "main_lambda_archive_file" {
 }
 
 resource "aws_s3_object" "main_lambda_source_file" {
-  bucket = aws_s3_bucket.main_lambda_source_bucket.id
+  bucket = aws_s3_bucket.lugeasy_lambda_source_bucket.id
   key = "main_lambda_source_file.zip"
   source = data.archive_file.main_lambda_archive_file.output_path
 }

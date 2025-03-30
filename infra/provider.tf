@@ -6,16 +6,16 @@ provider "aws" {
 // Backend 설정
 terraform {
   backend "s3" {
-    bucket         = "jimjim-terraform-state-bucket"
+    bucket         = "lugeasy-terraform-state-bucket"
     key            = "terraform.tfstate"
     region         = "ap-northeast-1"
     encrypt        = true
-    dynamodb_table = "jimjim-terraform-state"
+    dynamodb_table = "lugeasy-terraform-state"
   }
 }
 
-resource "aws_s3_bucket" "jimjim_terraform_state_bucket" {
-  bucket = "jimjim-terraform-state-bucket"
+resource "aws_s3_bucket" "lugeasy_terraform_state_bucket" {
+  bucket = "lugeasy-terraform-state-bucket"
   versioning {
     enabled = true
   }
@@ -28,8 +28,8 @@ resource "aws_s3_bucket" "jimjim_terraform_state_bucket" {
   }
 }
 
-resource "aws_dynamodb_table" "jimjim_terraform_state" {
-  name           = "jimjim-terraform-state"
+resource "aws_dynamodb_table" "lugeasy_terraform_state" {
+  name           = "lugeasy-terraform-state"
   read_capacity  = 5
   write_capacity = 5
   hash_key       = "LockID"
