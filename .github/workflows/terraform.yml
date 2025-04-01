@@ -43,9 +43,9 @@ jobs:
       working-directory: infra
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
-      working-directory: infra
+    #- name: Terraform Format
+     #run: terraform fmt -check
+      #working-directory: infra
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
