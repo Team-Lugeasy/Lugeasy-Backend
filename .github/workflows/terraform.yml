@@ -29,6 +29,12 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2 # ✅ Terraform 설치하는 공식 액션
 
+    - name: Zip Lambda source
+      run: |
+        cd src
+        zip -r ../infra/main_lambda_source_file.zip .
+
+
     # AWS 리소스 사용을 위한 Credentials 추가
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -58,28 +64,3 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       working-directory: infra
-
-    # 디버깅 
-    - name: Debug zip file
-      run: |
-        find infra -name "*.zip" -exec ls -lh {} \;
-
-    - name: Check src folder in CI
-      run: |
-        echo "::group::Directory structure"
-        ls -al
-        echo "::endgroup::"
-    
-        echo "::group::infra/"
-        ls -al infra
-        echo "::endgroup::"
-    
-        echo "::group::src/"
-        ls -al src
-        echo "::endgroup::"
-    
-        echo "::group::infra에서 ../src 접근 테스트"
-        ls -al infra/../src
-        echo "::endgroup::"
-
-    
