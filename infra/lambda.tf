@@ -16,4 +16,6 @@ resource "aws_lambda_function" "main_handler" {
 
   runtime = "python3.10"
   timeout = 10
+
+  publish = true
 }
