@@ -17,7 +17,6 @@ resource "aws_s3_object" "main_lambda_source_file" {
   bucket = aws_s3_bucket.main_lambda_source_bucket.id
   key    = "main_lambda_source_file.zip"
   source = data.archive_file.main_lambda_archive_file.output_path
-  etag   = filemd5(data.archive_file.main_lambda_archive_file.output_path)
 }
 
 resource "aws_lambda_function" "main_handler" {
