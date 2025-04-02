@@ -18,4 +18,6 @@ resource "aws_lambda_function" "main_handler" {
   timeout = 10
 
   publish = true
+
+  depends_on = [aws_s3_object.main_lambda_source_file] # 명시적 의존성 추가
 }
