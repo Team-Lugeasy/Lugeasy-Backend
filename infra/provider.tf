@@ -6,7 +6,7 @@ provider "aws" {
 // Backend 설정
 terraform {
   backend "s3" {
-    bucket         = "jimjim-terraform-state-bucket-test"
+    bucket         = "jimjim-terraform-state-bucket"
     key            = "terraform.tfstate"
     region         = "ap-northeast-3"
     encrypt        = true
