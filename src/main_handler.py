@@ -1,4 +1,5 @@
 # action 작동 확인
+# ap-northeast-3 리전 : lugeasy root 테스트
 import json
 from user.get_user import get_user
 from user.create_user import create_user
