@@ -15,8 +15,9 @@ resource "null_resource" "force_zip_regen" {
 
 resource "aws_s3_object" "main_lambda_source_file" {
   bucket = aws_s3_bucket.main_lambda_source_bucket.id
-  key    = "main_lambda_source_file.zip"
+  key    = "main_lambda_source_file_${data.archive_file.main_lambda_archive_file.output_base64sha256}.zip"
   source = data.archive_file.main_lambda_archive_file.output_path
+  depends_on = [data.archive_file.main_lambda_archive_file]
 }
 
 resource "aws_lambda_function" "main_handler" {
@@ -26,6 +27,7 @@ resource "aws_lambda_function" "main_handler" {
 
   s3_bucket         = aws_s3_object.main_lambda_source_file.bucket
   s3_key            = aws_s3_object.main_lambda_source_file.key
+  s3_object_version = aws_s3_object.main_lambda_source_file.version_id
   source_code_hash  = data.archive_file.main_lambda_archive_file.output_base64sha256
 
   runtime           = "python3.10"
