@@ -1,6 +1,6 @@
 // AWS 프로바이더 설정
 provider "aws" {
-  region = "ap-northeast-1"
+  region = "ap-northeast-3"
 }
 
 // Backend 설정
@@ -8,14 +8,14 @@ terraform {
   backend "s3" {
     bucket         = "lugeasy-terraform-state-bucket"
     key            = "terraform.tfstate"
-    region         = "ap-northeast-1"
+    region         = "ap-northeast-3"
     encrypt        = true
     dynamodb_table = "lugeasy-terraform-state"
   }
 }
 
 resource "aws_s3_bucket" "lugeasy_terraform_state_bucket" {
-  bucket = "lugeasy-terraform-state-bucket"
+  bucket = "lugeasy-terraform-state-bucket-root"
   versioning {
     enabled = true
   }
