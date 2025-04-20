@@ -21,7 +21,7 @@ resource "aws_api_gateway_method" "get_root" {
 
 resource "aws_api_gateway_method_response" "get_root" {
   rest_api_id   = aws_api_gateway_rest_api.root.id
-  resource_id   = aws_api_gateway_resource.user_resource.id
+  resource_id   = aws_api_gateway_resource.root_resource.id
   http_method   = aws_api_gateway_method.get_root.http_method
   status_code   = "200"
 }
