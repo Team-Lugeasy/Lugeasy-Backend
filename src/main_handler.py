@@ -4,7 +4,7 @@ from user.create_user import create_user
 
 def main_handler(event, context): 
     # 인증 처리
-        
+    print("Giogigi")
     # 전역 분기 함수
     
     path = event.get("path")
