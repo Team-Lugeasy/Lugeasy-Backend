@@ -11,6 +11,30 @@ resource "aws_api_gateway_resource" "root_resource" {
   path_part   = "api"
 }
 
+// [GET] /api
+resource "aws_api_gateway_method" "get_root" {
+  rest_api_id   = aws_api_gateway_rest_api.root.id
+  resource_id   = aws_api_gateway_resource.root_resource.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_method_response" "get_root" {
+  rest_api_id   = aws_api_gateway_rest_api.root.id
+  resource_id   = aws_api_gateway_resource.user_resource.id
+  http_method   = aws_api_gateway_method.get_root.http_method
+  status_code   = "200"
+}
+
+resource "aws_api_gateway_integration" "get_root_integration" {
+  rest_api_id             = aws_api_gateway_rest_api.root.id
+  resource_id             = aws_api_gateway_resource.root_resource.id
+  http_method             = aws_api_gateway_method.get_root.http_method
+  integration_http_method = "POST" 
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.main_handler.invoke_arn
+}
+
 // user api 
 resource "aws_api_gateway_resource" "user_resource" {
   rest_api_id = aws_api_gateway_rest_api.root.id
@@ -81,6 +105,7 @@ resource "aws_api_gateway_deployment" "root" {
   rest_api_id = aws_api_gateway_rest_api.root.id
 
   depends_on = [
+    aws_api_gateway_integration.get_root_integration,
     aws_api_gateway_integration.get_user_integration,
     aws_api_gateway_integration.post_user_integration,
   ]
