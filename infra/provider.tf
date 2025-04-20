@@ -36,6 +36,6 @@ resource "aws_dynamodb_table" "lugeasy_terraform_state" {
 
   attribute {
     name = "LockID"
-    type = "S"
+    type = "S"å
   }
 }
