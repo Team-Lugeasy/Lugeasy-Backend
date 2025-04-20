@@ -3,14 +3,12 @@ from user.get_user import get_user
 from user.create_user import create_user
 
 def main_handler(event, context): 
-    request = json.dumps(event)
-
     # 인증 처리
         
     # 전역 분기 함수
     
-    path = request.path
-    httpMethod = request.httpMethod
+    path = event.get("path")
+    httpMethod = event.get("httpMethod")
     
     response = None
     
