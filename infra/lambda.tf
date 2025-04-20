@@ -1,7 +1,7 @@
 data "archive_file" "main_lambda_archive_file" {
   type        = "zip"
-  source_dir  = "${path.module}/../src"
-  output_path = "${path.module}/main_lambda_source_file.zip"
+  source_dir  = "${path.root}/src"
+  output_path = "${path.root}/main_lambda_source_file.zip"
 
   # source_dir이 변경되었음을 Terraform에게 확실히 알려줌
   depends_on = [null_resource.force_zip_regen]
@@ -14,10 +14,9 @@ resource "null_resource" "force_zip_regen" {
 }
 
 resource "aws_s3_object" "main_lambda_source_file" {
-  bucket = aws_s3_bucket.main_lambda_source_bucket.id
-  key    = "main_lambda_source_file_${data.archive_file.main_lambda_archive_file.output_base64sha256}.zip"
+  bucket = aws_s3_bucket.lugeasy_lambda_source_bucket.id
+  key = "main_lambda_source_file.zip"
   source = data.archive_file.main_lambda_archive_file.output_path
-  depends_on = [data.archive_file.main_lambda_archive_file]
 }
 
 resource "aws_lambda_function" "main_handler" {
