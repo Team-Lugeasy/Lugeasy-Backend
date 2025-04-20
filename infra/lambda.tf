@@ -1,7 +1,7 @@
 data "archive_file" "main_lambda_archive_file" {
   type        = "zip"
-  source_dir  = "${path.root}/src"
-  output_path = "${path.root}/main_lambda_source_file.zip"
+  source_dir  = "${path.module}/../src"
+  output_path = "${path.module}/main_lambda_source_file.zip"
 
   # source_dir이 변경되었음을 Terraform에게 확실히 알려줌
   depends_on = [null_resource.force_zip_regen]

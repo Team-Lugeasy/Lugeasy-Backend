@@ -1,5 +1,5 @@
 resource "aws_route53_record" "api_alias" {
-  zone_id = data.aws_route53_zone.main.zone_id
+  zone_id = data.aws_route53_zone.main.id
   name    = "api.lugeasy.com"
   type    = "A"
 
