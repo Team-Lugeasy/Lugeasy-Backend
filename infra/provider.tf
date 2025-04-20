@@ -6,7 +6,7 @@ provider "aws" {
 // Backend 설정
 terraform {
   backend "s3" {
-    bucket         = "lugeasy-terraform-state-bucket"
+    bucket         = "jimjim-terraform-state-bucket-root"
     key            = "terraform.tfstate"
     region         = "ap-northeast-3"
     encrypt        = true
@@ -15,7 +15,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "lugeasy_terraform_state_bucket" {
-  bucket = "lugeasy-terraform-state-bucket-root"
+  bucket = "jimjim-terraform-state-bucket-root"
   versioning {
     enabled = true
   }
