@@ -1,12 +1,8 @@
-import json
 from user.get_user import get_user
 from user.create_user import create_user
+from auth.google_login import google_login
 
 def main_handler(event, context): 
-    # 인증 처리
-    print("Giogigi")
-    # 전역 분기 함수
-    
     path = event.get("path")
     httpMethod = event.get("httpMethod")
     
@@ -19,6 +15,8 @@ def main_handler(event, context):
     elif httpMethod == "POST":
         if path == "/user":
             response = create_user()
+        elif path == "/auth/google/login":
+            response = google_login()
     
     elif httpMethod == "DELETE":
         pass
@@ -26,12 +24,7 @@ def main_handler(event, context):
     elif httpMethod == "PUT":
         pass
     
-    # 404 Error -> 전역 error handler가 있더라
-    
-    # response dto도 한번에 처리
-    
     return {
         'statusCode': 200,
         'body': response
     }
-   
