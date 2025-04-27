@@ -1,9 +1,19 @@
-# lambda 소스코드를 저장하는 s3
-resource "aws_s3_bucket" "lugeasy_lambda_source_bucket" {
-  bucket = "main-lambda-source-bucket-root"
+# terraform lock state를 저장하는 s3
+resource "aws_s3_bucket" "lugeasy_terraform_state_s3" {
+  bucket = "lugeasy-terraform-state-s3"
 
   tags = {
-    Name        = "main-lambda-source-bucket-root"
+    Name        = "lugeasy-terraform-state-s3"
+    Environment = "dev"
+  }
+}
+
+# lambda 소스코드를 저장하는 s3
+resource "aws_s3_bucket" "lugeasy_main_lambda_source_s3" {
+  bucket = "lugeasy-main-lambda-source-s3"
+
+  tags = {
+    Name        = "lugeasy-main-lambda-source-s3"
     Environment = "dev"
   }
 }
