@@ -33,5 +33,9 @@ resource "aws_lambda_function" "main_handler" {
   timeout           = 10
   publish           = true
 
+  layers = [
+  aws_lambda_layer_version.google_auth_layer.arn
+  ]
+
   depends_on        = [aws_s3_object.main_lambda_source_file]
 }
