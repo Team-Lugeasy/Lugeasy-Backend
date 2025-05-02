@@ -15,8 +15,10 @@ def main_handler(event, context):
     elif httpMethod == "POST":
         if path == "/user":
             response = create_user()
-        elif path == "/auth/google/login":
-            response = google_login()
+        elif path == "/api/login/google":
+            body = json.loads(event.get("body", "{}"))
+            token = body.get("token")
+            response = google_login(token)
     
     elif httpMethod == "DELETE":
         pass
