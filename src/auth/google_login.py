@@ -3,10 +3,9 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as grequests
 import requests
 
-CLIENT_ID = ""
-token = ""
 
-def google_login():
+def google_login(token: str):
+    CLIENT_ID = "542604644530-o5skeafu7uu64uerchsihakmqrlbn1nq.apps.googleusercontent.com"
     try:
         token_info_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
         params = {'access_token': token}
