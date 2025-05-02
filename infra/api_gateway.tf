@@ -1,17 +1,16 @@
-// root api 
+// root api
 resource "aws_api_gateway_rest_api" "root" {
   name        = "RootAPI"
   description = "API Gateway for root"
 }
 
-// root api 
+// [GET] /api
 resource "aws_api_gateway_resource" "root_resource" {
   rest_api_id = aws_api_gateway_rest_api.root.id
   parent_id   = aws_api_gateway_rest_api.root.root_resource_id
   path_part   = "api"
 }
 
-// [GET] /api
 resource "aws_api_gateway_method" "get_root_method" {
   rest_api_id   = aws_api_gateway_rest_api.root.id
   resource_id   = aws_api_gateway_resource.root_resource.id
@@ -23,7 +22,7 @@ resource "aws_api_gateway_integration" "get_root_integration" {
   rest_api_id             = aws_api_gateway_rest_api.root.id
   resource_id             = aws_api_gateway_resource.root_resource.id
   http_method             = aws_api_gateway_method.get_root_method.http_method
-  integration_http_method = "POST" 
+  integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.main_handler.invoke_arn
 }
@@ -35,24 +34,19 @@ resource "aws_api_gateway_resource" "login_resource" {
   path_part   = "login"
 }
 
-resource "aws_api_gateway_resource" "google_login_resource" {
-  rest_api_id = aws_api_gateway_rest_api.root.id
-  parent_id   = aws_api_gateway_resource.login_resource.id
-  path_part   = "google"
-}
-
-resource "aws_api_gateway_method" "google_login_method" {
+resource "aws_api_gateway_method" "login_method" {
   rest_api_id   = aws_api_gateway_rest_api.root.id
-  resource_id   = aws_api_gateway_resource.google_login_resource.id
+  resource_id   = aws_api_gateway_resource.login_resource.id
   http_method   = "POST"
   authorization = "NONE"
+  request_parameters = { "method.request.querystring.social" = true }
 }
 
-resource "aws_api_gateway_integration" "google_login_integration" {
+resource "aws_api_gateway_integration" "login_integration" {
   rest_api_id             = aws_api_gateway_rest_api.root.id
-  resource_id             = aws_api_gateway_resource.google_login_resource.id
-  http_method             = aws_api_gateway_method.google_login_method.http_method
-  integration_http_method = "POST" 
+  resource_id             = aws_api_gateway_resource.login_resource.id
+  http_method             = aws_api_gateway_method.login_method.http_method
+  integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.main_handler.invoke_arn
 }
@@ -77,9 +71,8 @@ resource "aws_api_gateway_deployment" "root" {
       aws_api_gateway_method.get_root_method.id,
       aws_api_gateway_integration.get_root_integration.id,
       aws_api_gateway_resource.login_resource.id,
-      aws_api_gateway_resource.google_login_resource.id,
-      aws_api_gateway_method.google_login_method.id,
-      aws_api_gateway_integration.get_root_integration.id,
+      aws_api_gateway_method.login_method.id,
+      aws_api_gateway_integration.login_integration.id, 
     ]))
   }
 

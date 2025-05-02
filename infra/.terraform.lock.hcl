@@ -60,10 +60,3 @@ provider "registry.terraform.io/hashicorp/null" {
     "zh:ed0fe2acdb61330b01841fa790be00ec6beaac91d41f311fb8254f74eb6a711f",
   ]
 }
-
-provider "registry.terraform.io/hashicorp/template" {
-  version = "2.2.0"
-  hashes = [
-    "h1:hHu6AIQNuUEdR/nFXs+0g4iiMFGKAiBN8nbsPFh5tc8=",
-  ]
-}
