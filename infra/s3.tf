@@ -21,6 +21,6 @@ resource "aws_s3_bucket" "lugeasy_main_lambda_source_s3" {
 resource "aws_s3_bucket_versioning" "lugeasy_main_lambda_source_s3_versioning" {
   bucket = aws_s3_bucket.lugeasy_main_lambda_source_s3.id
   versioning_configuration {
-    status = "Disabled"
+    status = "Enabled"
   }
 }
