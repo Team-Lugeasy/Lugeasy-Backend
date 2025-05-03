@@ -24,11 +24,15 @@ resource "aws_lambda_function" "main_handler" {
   # handler           = "main_handler.main_handler"
   role              = aws_iam_role.main_lambda.arn
 
-  image_uri = "448522292146.dkr.ecr.ap-northeast-1.amazonaws.com/lugeasy-main-ecr-repo:latest"
+  image_uri    = "${aws_ecr_repository.lugeasy_main_ecr_repo.repository_url}:latest"
   package_type = "Image"
-
+  
   memory_size = 128
   timeout = 30
+
+  lifecycle {
+    create_before_destroy = true
+  }
   # s3_bucket         = aws_s3_object.main_lambda_source_file.bucket
   # s3_key            = aws_s3_object.main_lambda_source_file.key
   # s3_object_version = aws_s3_object.main_lambda_source_file.version_id
