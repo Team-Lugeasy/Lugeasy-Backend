@@ -1,3 +1,4 @@
+# lambda -> dynamodb
 resource "aws_iam_policy" "main_lambda_dynamodb" {
   name = "main_lambda_dynamodb_policy"
 
@@ -14,7 +15,7 @@ resource "aws_iam_policy" "main_lambda_dynamodb" {
   })
 }
 
-# CloudWatch 로그를 위한 IAM 정책
+# lambda -> cloduwatch
 resource "aws_iam_policy" "main_lambda_logging" {
   name = "main_lambda_logging_policy"
 
@@ -34,13 +35,7 @@ resource "aws_iam_policy" "main_lambda_logging" {
   })
 }
 
-# 위 정책을 Lambda IAM Role에 붙이기
-resource "aws_iam_role_policy_attachment" "main_lambda_logging_attach" {
-  role       = aws_iam_role.main_lambda.name
-  policy_arn = aws_iam_policy.main_lambda_logging.arn
-}
-
-
+# lambda -> ecr 
 resource "aws_iam_policy" "main_lambda_ecr_access_policy" {
   name        = "main_lambda_ecr_access_policy"
   description = "IAM policy for Lambda to access ECR repository"
@@ -61,6 +56,10 @@ resource "aws_iam_policy" "main_lambda_ecr_access_policy" {
       }
     ]
   })
+}
+resource "aws_iam_role_policy_attachment" "main_lambda_logging_attach" {
+  role       = aws_iam_role.main_lambda.name
+  policy_arn = aws_iam_policy.main_lambda_logging.arn
 }
 
 resource "aws_iam_role_policy_attachment" "main_lambda_ecr_access_attachment" {
