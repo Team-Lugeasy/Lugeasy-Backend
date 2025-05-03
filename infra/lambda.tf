@@ -26,9 +26,6 @@ resource "aws_lambda_function" "main_handler" {
 
   image_uri    = "${aws_ecr_repository.lugeasy_main_ecr_repo.repository_url}:latest"
   package_type = "Image"
-  
-  memory_size = 128
-  timeout = 30
 
   lifecycle {
     create_before_destroy = true
