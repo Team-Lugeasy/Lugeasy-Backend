@@ -9,9 +9,9 @@ def main_handler(event, context):
     response = None
     
     if httpMethod == "GET":
-        if path == "/user":
-            response = get_user()
-        
+        if path == "/api":
+            response = "hihi"
+
     elif httpMethod == "POST":
         if path == "/user":
             response = create_user()

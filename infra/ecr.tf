@@ -50,26 +50,3 @@ resource "aws_ecr_repository_policy" "lugeasy_main_ecr_repo_policy" {
   }
   EOF
 }
-
-# resource "null_resource" "push_initial_dummy_image" {
-#   depends_on = [
-#     aws_ecr_repository.lugeasy_main_ecr_repo,
-#     aws_ecr_repository_policy.lugeasy_main_ecr_repo_policy,
-#     aws_ecr_lifecycle_policy.lugeasy_main_ecr_repo_lilfecycle_policy
-#   ]
-
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       ACCOUNT_ID=AKIAWQ3QDBOZF5TZNLXZ
-#       REGION=ap-northeast-1
-#       ECR_REPO_NAME=${aws_ecr_repository.lugeasy_main_ecr_repo.name}
-#       ECR_REGISTRY=${ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
-#       aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}
-
-#       docker pull alpine/git:latest
-#       docker tag alpine/git:latest ${ECR_REGISTRY}/${ECR_REPO_NAME}:initial
-
-#       docker push ${ECR_REGISTRY}/${ECR_REPO_NAME}:initial
-#     EOT
-#   }
-# }
