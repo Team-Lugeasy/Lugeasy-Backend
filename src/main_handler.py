@@ -7,7 +7,10 @@ def main_handler(event, context):
     path = event.get("path")
     httpMethod = event.get("httpMethod")
     
-    response = None
+    response = {
+            "status_code": 404,
+            "data": { "error_message": "404 error" }
+        }
     
     if httpMethod == "GET":
         if path == "/api":
@@ -19,7 +22,7 @@ def main_handler(event, context):
     elif httpMethod == "POST":
         if path == "/user":
             response = create_user()
-        elif path == "/api/login/google":
+        elif path == "/api/login":
             body = json.loads(event.get("body", "{}"))
             token = body.get("token")
             response = google_login(token)
