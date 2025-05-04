@@ -28,6 +28,6 @@ def main_handler(event, context):
         pass
     
     return {
-        'statusCode': 200,
-        'body': json.dumps(response)
+        'statusCode': response["status_code"],
+        'body': json.dumps(response["data"])
     }

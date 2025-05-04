@@ -1,7 +1,9 @@
 resource "aws_ecr_repository" "lugeasy_main_ecr_repo" {
   name                 = "lugeasy-main-ecr-repo"
   image_tag_mutability = "MUTABLE"  
-  force_delete = false
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }
 
 resource "aws_ecr_lifecycle_policy" "lugeasy_main_ecr_repo_lilfecycle_policy" {
