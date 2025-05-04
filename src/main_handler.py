@@ -1,6 +1,7 @@
 from user.get_user import get_user
 from user.create_user import create_user
 from auth.google_login import google_login
+import json
 
 def main_handler(event, context): 
     path = event.get("path")
@@ -28,5 +29,5 @@ def main_handler(event, context):
     
     return {
         'statusCode': 200,
-        'body': response
+        'body': json.dumps(response)
     }
