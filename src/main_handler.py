@@ -11,7 +11,10 @@ def main_handler(event, context):
     
     if httpMethod == "GET":
         if path == "/api":
-            response = "hihi"
+            response = {
+            "status_code": 200,
+            "data": { "message": "hihi" }
+        }
 
     elif httpMethod == "POST":
         if path == "/user":
