@@ -35,6 +35,6 @@ def google_login(token: str):
     except ValueError as e:
         return {
             "status_code": 401,
-            "data": { "error_message": "Invalid token" }
+            "data": { "error_message": str(e) }
         }
 
