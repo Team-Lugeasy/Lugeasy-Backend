@@ -1,21 +1,25 @@
 name: Push Swagger YAML to SwaggerHub
 
 on:
-    push:
-        paths:
-            - "swagger.yaml"
+  push:
+    paths:
+      - "swagger.yaml"
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-            - name: Upload to SwaggerHub
-              run: |
-                  curl -X POST "https://api.swaggerhub.com/apis/lugeasy/lugeasy-api-docs/1.0.0" \
-                    -H "Authorization: ${{ secrets.SWAGGERHUB_API_KEY }}" \
-                    -H "Content-Type: application/yaml" \
-                    --data-binary @swagger.yaml
+      - name: Install SwaggerHub CLI
+        run: npm install -g swaggerhub-cli
+
+      - name: Upload to SwaggerHub via CLI
+        run: |
+          swaggerhub api:push lugeasy/lugeasy-api-docs/1.0.0 \
+            --file swagger.yaml \
+            --token ${{ secrets.SWAGGERHUB_API_KEY }} \
+            --visibility public \
+            --force
