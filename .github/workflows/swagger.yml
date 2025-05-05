@@ -13,12 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install SwaggerHub CLI (legacy version)
-        run: npm install -g swaggerhub@8.0.0
+      - name: Install SwaggerHub CLI
+        run: npm install -g swaggerhub@0.8.0
 
       - name: Upload to SwaggerHub via CLI
         run: |
-          swaggerhub api:push lugeasy/lugeasy-api-docs/1.0.0 \
+          swaggerhub api:publish lugeasy/lugeasy-api-docs/1.0.0 \
             --file swagger.yaml \
             --token ${{ secrets.SWAGGERHUB_API_KEY }} \
             --visibility public \
