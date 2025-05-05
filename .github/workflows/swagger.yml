@@ -1,0 +1,21 @@
+name: Push Swagger YAML to SwaggerHub
+
+on:
+    push:
+        paths:
+            - "swagger.yaml"
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Upload to SwaggerHub
+              run: |
+                  curl -X PUT "https://app.swaggerhub.com/apis/lugeasy/lugeasy-api-docs/1.0.0" \
+                    -H "Authorization: ${{ secrets.SWAGGERHUB_API_KEY }}" \
+                    -H "Content-Type: application/yaml" \
+                    --data-binary @swagger.yaml
