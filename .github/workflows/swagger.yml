@@ -23,6 +23,6 @@ jobs:
         run: |
           swaggerhub api:update lugeasy/lugeasy-api-docs/1.0.0 \
             --file swagger.yaml \
-            --visibility public \
-            --publish=publish \
+            --visibility=public \
+            --published=publish \
             --setdefault
