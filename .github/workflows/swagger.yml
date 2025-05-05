@@ -15,7 +15,7 @@ jobs:
 
             - name: Upload to SwaggerHub
               run: |
-                  curl -X PUT "https://api.swaggerhub.com/apis/lugeasy/lugeasy-api-docs/1.0.0" \
+                  curl -X POST "https://api.swaggerhub.com/apis/lugeasy/lugeasy-api-docs/1.0.0" \
                     -H "Authorization: ${{ secrets.SWAGGERHUB_API_KEY }}" \
                     -H "Content-Type: application/yaml" \
                     --data-binary @swagger.yaml
