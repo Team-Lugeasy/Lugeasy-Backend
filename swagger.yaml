@@ -97,7 +97,7 @@ paths:
     /test:
         get:
             summary: 테스트
-            description: 테스트
+            description: 테스트(404 오는게 정상)
             security:
                 - BearerAuth: []
             responses:
