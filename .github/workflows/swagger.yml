@@ -19,10 +19,6 @@ jobs:
       - name: Install SwaggerHub CLI
         run: npm install -g swaggerhub-cli
 
-      - name: Upload to SwaggerHub via CLI
+      - name: Update SwaggerHub API Definition
         run: |
-          swaggerhub api:update lugeasy/lugeasy-api-docs/1.0.0 \
-            --file swagger.yaml \
-            --visibility=public \
-            --published=publish \
-            --setdefault
+          swaggerhub api:update lugeasy/lugeasy-api-docs/1.0.0 --file swagger.yaml --published=publish
