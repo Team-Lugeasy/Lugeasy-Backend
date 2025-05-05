@@ -13,8 +13,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install SwaggerHub CLI
-        run: npm install -g swaggerhub-cli
+      - name: Install SwaggerHub CLI (legacy version)
+        run: npm install -g swaggerhub@8.0.0
 
       - name: Upload to SwaggerHub via CLI
         run: |
