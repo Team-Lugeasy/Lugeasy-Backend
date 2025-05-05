@@ -1,11 +1,13 @@
 from main_handler import main_handler
+import json
 
 if __name__ == "__main__":
     fake_event = {
-        "httpMethod": "GET",
-        "path": "/api"
+        "httpMethod": "POST",
+        "path": "/api/login",
+        "body": json.dumps({"token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA3YjgwYTM2NTQyODUyNWY4YmY3Y2QwODQ2ZDc0YThlZTRlZjM2MjUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNzg1MjQzNzY3MTctYzRlbWRvZ2tuc29nc3JnbXBiZXZzdGt2ZDJ2ZG5kcm0uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNzg1MjQzNzY3MTctajdoZ2k5a2FoOHV1amExbzVscm9qMGZmbzlvZzNsOWouYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTgxODgzNTI3OTExNjcxNzc3NTYiLCJlbWFpbCI6InBsYXNoZG9mQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoi67CV7KeE7ISxIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xHS2tXNm9WaHNvdGRrSU9rS050X19CdDAxaUVUM1M0bDRMM3V3QTlNZzlWdEVMUT1zOTYtYyIsImdpdmVuX25hbWUiOiLsp4TshLEiLCJmYW1pbHlfbmFtZSI6IuuwlSIsImlhdCI6MTc0NjQzNTQ4MSwiZXhwIjoxNzQ2NDM5MDgxfQ.oWPhS7PFqEVTlc92i4Ci-WnJXyaZXXrRn8Nou-x-ZaclO-yvuOzOYKZEbM1LmOQz1FEHr7Vp6Z2unOR_nAaveJL5rzMGXJJFuJCIrjeJ54Z5UfLoxYBsFiM_LXeB6LtC8uU6uzgREihMG0NcvnuhBd3Yg_KEE8wlaGROVNKr8L9HC9z_b8F-nv0imUmqvW8KLw3kW4tInz-bEW8Uea2th8CR0pTFDNj17x_xX9f8b3nJLQP0SrHMwfaxbWWKb6cV6"})
     }
 
-    response = main_handler(event = fake_event, context=None)
+    response = main_handler(event=fake_event, context=None)
 
     print(response)
