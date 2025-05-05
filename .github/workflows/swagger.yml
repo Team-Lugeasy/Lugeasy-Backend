@@ -21,4 +21,7 @@ jobs:
 
       - name: Update SwaggerHub API Definition
         run: |
-          swaggerhub api:update lugeasy/lugeasy-api-docs/1.0.0 --file swagger.yaml --published=publish
+          swaggerhub api:unpublish lugeasy/lugeasy-api-docs/1.0.0
+          swaggerhub api:update lugeasy/lugeasy-api-docs/1.0.0 --file swagger.yaml
+          swaggerhub api:publish lugeasy/lugeasy-api-docs/1.0.0
+
