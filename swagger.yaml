@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-    - description: lugeasy API 명세
+    - description: lugeasy API 명세(수정 테스트)
       url: https://api.lugeasy.link/api
 info:
     version: 1.0.0
