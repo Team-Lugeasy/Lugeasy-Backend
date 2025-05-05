@@ -1,4 +1,5 @@
 import requests
+import json
 from google.oauth2 import id_token
 from google.auth.transport import requests as grequests
 
@@ -14,6 +15,7 @@ def google_login(token: str):
     try:
         user_info = requests.get("https://oauth2.googleapis.com/tokeninfo?id_token={token}")
         print(user_info)
+        print(json.dumps(user_info))
         # user_info = id_token.verify_oauth2_token(token, grequests.Request(), CLIENT_ID)
 
         # user_id = user_info["sub"] 
