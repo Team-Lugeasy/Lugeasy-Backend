@@ -16,13 +16,15 @@ jobs:
       - name: Install SwaggerHub CLI
         run: npm install -g swaggerhub-cli
 
-      - name: Configure SwaggerHub CLI
+      - name: Configure SwaggerHub CLI (JSON)
         run: |
           mkdir -p ~/.swaggerhub
-          cat <<EOF > ~/.swaggerhub/config.yaml
-          apiKey: ${{ secrets.SWAGGERHUB_API_KEY }}
-          defaultOwner: lugeasy
-          swaggerHubUrl: https://api.swaggerhub.com
+          cat <<EOF > ~/.swaggerhub/config.json
+          {
+            "apiKey": "${{ secrets.SWAGGERHUB_API_KEY }}",
+            "defaultOwner": "lugeasy",
+            "swaggerHubUrl": "https://api.swaggerhub.com"
+          }
           EOF
 
       - name: Upload to SwaggerHub via CLI
