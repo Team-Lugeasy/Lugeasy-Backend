@@ -4,7 +4,7 @@ servers:
       url: https://api.lugeasy.link/api
 info:
     version: 1.0.0
-    title: lugeasy-api-docs
+    title: lugeasy-api-docs(수정 테스트)
     description: lugeasy api docs
 paths:
     /auth/login:
