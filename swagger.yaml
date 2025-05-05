@@ -5,7 +5,7 @@ servers:
 info:
     version: 1.0.0
     title: lugeasy-api-docs(수정 테스트)
-    description: lugeasy api docs(수정)
+    description: lugeasy api docs(수정2)
 paths:
     /auth/login:
         post:
