@@ -16,18 +16,23 @@ def google_login(token: str):
         user_info = id_token.verify_oauth2_token(token, grequests.Request(), CLIENT_ID)
 
         print(user_info)
-        print(json.dumps(user_info))
 
         user_id = user_info["sub"] 
         email = user_info["email"]
         name = user_info["name"]
+        user_image = user_info["picture"]
+
+        # db에 있는 유저인지 확인
+
+        # user_id(단방향 암호화를?)로 토큰 만들기
 
         return {
             "status_code": 200,
             "data": { "user": {
-                    "id": 'a',
-                    "email": 'a',
-                    "name": 'a'
+                    "id": user_id,
+                    "email": email,
+                    "name": name,
+                    "user_image": user_image
                 }
             }
         }
