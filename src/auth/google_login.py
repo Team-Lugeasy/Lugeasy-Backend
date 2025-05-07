@@ -4,7 +4,7 @@ from google.auth.transport import requests as grequests
 
 
 def google_login(token: str):
-    CLIENT_ID = "542604644530-o5skeafu7uu64uerchsihakmqrlbn1nq.apps.googleusercontent.com"
+    CLIENT_ID = "378524376717-j7hgi9kah8uuja1o5lroj0ffo9og3l9j.apps.googleusercontent.com"
     
     if token is None:
         return {
