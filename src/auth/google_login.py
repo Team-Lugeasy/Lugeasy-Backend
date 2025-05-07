@@ -1,4 +1,3 @@
-import requests
 import json
 from google.oauth2 import id_token
 from google.auth.transport import requests as grequests
@@ -12,17 +11,16 @@ def google_login(token: str):
             "status_code": 401,
             "data": { "error_message": "No token" }
         }
+    
     try:
-        user_info = requests.get("https://oauth2.googleapis.com/tokeninfo?id_token={token}")
+        user_info = id_token.verify_oauth2_token(token, grequests.Request(), CLIENT_ID)
+
         print(user_info)
         print(json.dumps(user_info))
-        # user_info = id_token.verify_oauth2_token(token, grequests.Request(), CLIENT_ID)
 
-        # user_id = user_info["sub"] 
-        # email = user_info["email"]
-        # name = user_info["name"]
-
-        # TODO: DB 조회 또는 JWT 발급
+        user_id = user_info["sub"] 
+        email = user_info["email"]
+        name = user_info["name"]
 
         return {
             "status_code": 200,
@@ -33,8 +31,6 @@ def google_login(token: str):
                 }
             }
         }
-    
-    
 
     except ValueError as e:
         return {
