@@ -14,8 +14,6 @@ class AuthService:
         try:
             user_info = id_token.verify_oauth2_token(token, grequests.Request(), self.CLIENT_ID)
 
-            print(user_info)
-
             user_id = user_info["sub"]
             email = user_info["email"]
             name = user_info["name"]
@@ -36,4 +34,10 @@ class AuthService:
             return {
                 "status_code": 401,
                 "data": { "error_message": str(e) }
+            }
+
+    def apple_login(self, token: str):
+        return {
+                "status_code": 200,
+                "data": "개발중"
             }
