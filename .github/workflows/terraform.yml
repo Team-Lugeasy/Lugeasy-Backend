@@ -72,7 +72,7 @@ jobs:
                   IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/lugeasy-main-ecr-repo:$IMAGE_TAG
 
                   aws lambda update-function-code \
-                    --function-name your-lambda-function-name \
+                    --function-name main_handler \
                     --image-uri $IMAGE_URI \
                     --region ${{ env.AWS_REGION }} \
                     --publish
