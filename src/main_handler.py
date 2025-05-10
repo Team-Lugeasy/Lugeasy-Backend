@@ -1,39 +1,37 @@
-from user.get_user import get_user
-from user.create_user import create_user
-from auth.google_login import google_login
+from fastapi import FastAPI, APIRouter, Query
+from mangum import Mangum
 import json
 
-def main_handler(event, context): 
-    path = event.get("path")
-    httpMethod = event.get("httpMethod")
-    
-    response = {
-            "status_code": 404,
-            "data": { "error_message": "404 error" }
-        }
-    
-    if httpMethod == "GET":
-        if path == "/api":
-            response = {
-            "status_code": 200,
-            "data": { "message": "hihi" }
-        }
+app = FastAPI(
+    title="FastAPI Serverless",
+    description="FastAPI를 활용한 서버리스",
+    version="0.1.0",
+    root_path="/v1",
+)
 
-    elif httpMethod == "POST":
-        if path == "/user":
-            response = create_user()
-        elif path == "/api/login":
-            body = json.loads(event.get("body", "{}"))
-            token = body.get("token")
-            response = google_login(token)
-    
-    elif httpMethod == "DELETE":
-        pass
-    
-    elif httpMethod == "PUT":
-        pass
-    
+api_router = APIRouter(prefix="/api")
+
+@app.get("/")
+async def health_check():
+    response = {
+        "status_code": 200,
+        "data": { "message": "hihi" }
+    }
+
     return {
         'statusCode': response["status_code"],
         'body': json.dumps(response["data"])
     }
+
+@app.get("/login")
+async def google_login(token: str):
+    response = google_login(token)
+
+    return {
+        'statusCode': response["status_code"],
+        'body': json.dumps(response["data"])
+    }
+
+app.include_router(api_router)
+
+main_handler = Mangum(app)
