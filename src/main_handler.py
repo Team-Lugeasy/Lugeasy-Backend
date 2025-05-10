@@ -1,10 +1,12 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.responses import JSONResponse
 from mangum import Mangum
+from controller.auth import auth_router
 
 app = FastAPI()
 
 api_router = APIRouter(prefix="/api")
+api_router.include_router(auth_router)
 
 @api_router.get("/")
 async def health_check():
@@ -12,12 +14,6 @@ async def health_check():
         "status_code": 200,
         "data": { "message": "hihi" }
     }
-
-    return JSONResponse(status_code=response["status_code"], content=response["data"])
-
-@api_router.get("/login")
-async def google_login(token: str):
-    response = google_login(token)
 
     return JSONResponse(status_code=response["status_code"], content=response["data"])
 
