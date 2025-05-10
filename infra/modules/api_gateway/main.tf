@@ -24,6 +24,7 @@ resource "aws_api_gateway_deployment" "root" {
       aws_api_gateway_method.get_root_method.id,
       aws_api_gateway_integration.get_root_integration.id,
 
+      aws_api_gateway_resource.auth_resource.id,
       aws_api_gateway_resource.login_resource.id,
       aws_api_gateway_method.login_method.id,
 

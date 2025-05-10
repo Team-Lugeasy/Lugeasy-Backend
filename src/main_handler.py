@@ -1,7 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.responses import JSONResponse
 from mangum import Mangum
-import json
 
 app = FastAPI()
 
