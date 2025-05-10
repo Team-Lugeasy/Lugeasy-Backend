@@ -3,7 +3,6 @@ from fastapi.responses import JSONResponse
 from service.auth import AuthService
 from pydantic import BaseModel
 
-
 auth_router = APIRouter(prefix="/auth")
 
 class LoginRequest(BaseModel):
