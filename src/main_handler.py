@@ -2,12 +2,7 @@ from fastapi import FastAPI, APIRouter, Query
 from mangum import Mangum
 import json
 
-app = FastAPI(
-    title="FastAPI Serverless",
-    description="FastAPI를 활용한 서버리스",
-    version="0.1.0",
-    root_path="/v1",
-)
+app = FastAPI()
 
 api_router = APIRouter(prefix="/api")
 
