@@ -64,3 +64,15 @@ jobs:
               if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
               run: terraform apply -auto-approve
               working-directory: infra
+
+            - name: Update Lambda function code
+              if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+              run: |
+                  IMAGE_TAG=latest
+                  IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/lugeasy-main-ecr-repo:$IMAGE_TAG
+
+                  aws lambda update-function-code \
+                    --function-name your-lambda-function-name \
+                    --image-uri $IMAGE_URI \
+                    --region ${{ env.AWS_REGION }} \
+                    --publish
