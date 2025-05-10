@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from service.auth import AuthService
 
-auth_router = APIRouter(prefix="/api/auth")
+auth_router = APIRouter(prefix="/auth")
 
 @auth_router.get("/login")
 async def login(token: str, auth_service: AuthService):
