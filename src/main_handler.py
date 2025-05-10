@@ -7,7 +7,7 @@ app = FastAPI()
 
 api_router = APIRouter(prefix="/api")
 
-@app.get("/")
+@api_router.get("/")
 async def health_check():
     response = {
         "status_code": 200,
@@ -16,7 +16,7 @@ async def health_check():
 
     return JSONResponse(status_code=response["status_code"], content=response["data"])
 
-@app.get("/login")
+@api_router.get("/login")
 async def google_login(token: str):
     response = google_login(token)
 
